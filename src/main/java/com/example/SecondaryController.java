@@ -1,0 +1,87 @@
+package com.example;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import java.io.IOException;
+
+public class SecondaryController {
+
+    @FXML
+    private PasswordField confirmPassword;
+
+    @FXML
+    private Button createAccountButton;
+
+    @FXML
+    private Hyperlink logInHyperLink;
+
+    @FXML
+    private TextField signUpLogin;
+
+    @FXML
+    private PasswordField signUpPassword;
+
+    @FXML
+    private Label fieldsNull;
+
+    @FXML
+    private Label passwordFieldNull;
+
+    @FXML
+    private Label userFieldNull;
+
+    @FXML
+    private Label confPassWrong;
+
+    private boolean a1;
+    private boolean a2;
+    private boolean a3;
+    private boolean a4;
+
+    @FXML
+    void createButtonClicked(MouseEvent event) {
+        if (signUpPassword.getText().equals("") && signUpLogin.getText().equals("")) {
+		if (a1) {userFieldNull.setVisible(false);a1 = false;}
+		else if (a2) {passwordFieldNull.setVisible(false);a2 = false;}
+		else if (a4) {confPassWrong.setVisible(false);a4 = false;}
+		fieldsNull.setVisible(true);
+		a3 = true;
+        } else if (!signUpPassword.getText().equals("") && signUpLogin.getText().equals("")) {
+		if (a2) {passwordFieldNull.setVisible(false);a2 = false;}
+		else if (a3) {fieldsNull.setVisible(false);a3 = false;}
+		else if (a4) {confPassWrong.setVisible(false);a4 = false;}
+		userFieldNull.setVisible(true);
+		a1 = true;
+	} else if (!signUpLogin.getText().equals("") && signUpPassword.getText().equals("")) {
+		if (a1) {userFieldNull.setVisible(false); a1 = false;}
+		else if (a3) {fieldsNull.setVisible(false);a3= false;}
+		else if (a4) {confPassWrong.setVisible(false);a4 = false;}
+		passwordFieldNull.setVisible(true);
+		a2 = true;
+	} else if (!confirmPassword.getText().equals("") && !confirmPassword.getText().equals(signUpPassword.getText())) 
+	{
+		if (a3) {fieldsNull.setVisible(false);a3 = false;}
+		else if (a2) {passwordFieldNull.setVisible(false); a2 = false;}
+		else if (a1) {userFieldNull.setVisible(false);a1 = false;}
+		confPassWrong.setVisible(true);
+		a4 = true;
+	}
+       
+	else {
+		fieldsNull.setVisible(false);
+		userFieldNull.setVisible(false);
+		passwordFieldNull.setVisible(false);
+		confPassWrong.setVisible(false);
+	}
+    }
+
+    @FXML
+    void switchToPrimary(MouseEvent event) throws IOException {
+        App.setRoot("primary");
+    }
+}

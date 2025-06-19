@@ -1,0 +1,70 @@
+package com.example;
+
+// импорт нужный библиотек
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+public class PrimaryController {
+
+    // Обьявление нужных переменных и обьектов
+    @FXML
+    private Hyperlink createAccountHyperLink;
+    @FXML
+    private Button logButton;
+    @FXML
+    private Label nullFields;
+    @FXML
+    private Label nullPasswordField;
+    @FXML
+    private TextField userLogin;
+    @FXML
+    private PasswordField userPassword;
+    @FXML
+    private Label loginFieldNull;
+    private boolean nullFieldsLabelVisible;
+    private boolean nullPasswordFieldVisible;
+
+    // функция , выполняющаяся при каком-то действии с кнопкой (указывать функцию,
+    // которая будет выполняться , делается в FXML-файле)
+    @FXML
+    void onButtonAction(ActionEvent event) {
+        if (userLogin.getText().equals("") && userPassword.getText().equals("")) {
+            if (nullPasswordFieldVisible) {
+                nullPasswordField.setVisible(false);
+                nullPasswordFieldVisible = false;
+            }
+            nullFields.setVisible(true);
+            nullFieldsLabelVisible = true;
+        } else if (!userLogin.getText().equals("") && userPassword.getText().equals("")) {
+            if (nullFieldsLabelVisible) {
+                nullFields.setVisible(false);
+                nullFieldsLabelVisible = false;
+            }
+            nullPasswordField.setVisible(true);
+            nullPasswordFieldVisible = true;
+        } else if (!userPassword.getText().equals("") && userLogin.getText().equals("")){
+		nullFields.setVisible(false);
+		nullPasswordField.setVisible(false);
+		loginFieldNull.setVisible(true);
+
+	} else {
+            if (nullFieldsLabelVisible) {
+                nullFields.setVisible(false);
+            } else if (nullPasswordFieldVisible) {
+                nullPasswordField.setVisible(false);
+            }
+	    loginFieldNull.setVisible(false);
+        }
+    }
+
+    @FXML
+    void onCreateLink(ActionEvent event) throws Exception {
+        App.setRoot("secondary");
+    }
+
+}
