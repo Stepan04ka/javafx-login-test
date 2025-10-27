@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
+import com.example.DatabaseConnection;
 
 public class SecondaryController {
 
@@ -42,9 +44,12 @@ public class SecondaryController {
     private boolean a2;
     private boolean a3;
     private boolean a4;
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    // complete db connecting
     @FXML
     void createButtonClicked(MouseEvent event) {
+    	databaseConnection.openConnetion();
         if (signUpPassword.getText().equals("") && signUpLogin.getText().equals("")) {
 		if (a1) {userFieldNull.setVisible(false);a1 = false;}
 		else if (a2) {passwordFieldNull.setVisible(false);a2 = false;}
@@ -77,6 +82,7 @@ public class SecondaryController {
 		userFieldNull.setVisible(false);
 		passwordFieldNull.setVisible(false);
 		confPassWrong.setVisible(false);
+
 	}
     }
 
